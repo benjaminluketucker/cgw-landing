@@ -695,6 +695,8 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
   text-transform: uppercase;
   text-decoration: none;
 }
+.footer-social { display: flex; }
+
 .footer-nav a {
   display: inline-flex;
   align-items: center;
