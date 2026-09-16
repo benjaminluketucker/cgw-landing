@@ -158,12 +158,24 @@ a:hover { color: var(--cgw-text); }
 
 /* full-screen menu */
 
+/* while the menu is open the header is pinned, so the wordmark and the X stay
+   on screen on iOS, where a sticky header drops out of view once scrolling is locked */
+html.menu-open .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+html.menu-open,
+html.menu-open body { overflow: hidden; }
+
 .site-menu {
   position: fixed;
   inset: 0;
   z-index: 15;
   background: var(--cgw-brown);
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding-top: 73px;
 }
 .site-menu[hidden] { display: none; }
@@ -719,6 +731,15 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
 
 /* ---------- wider screens ---------- */
 
+/* short phone viewports (browser bars showing): the portrait gives up height so the
+   lede and the download lockup still sit inside the fold. On an 844px viewport it is unchanged. */
+@media (max-width: 699px) {
+  .hero-portrait {
+    aspect-ratio: auto;
+    height: clamp(360px, calc(100svh - 330px), 125vw);
+  }
+}
+
 @media (min-width: 700px) {
   :root { --gutter: 56px; }
 
@@ -821,7 +842,8 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding: 72px var(--gutter);
+    /* left edge matches .wrap (1320px centred) once the screen is wider than the container */
+    padding: 72px var(--gutter) 72px max(var(--gutter), calc((100vw - 1320px) / 2 + var(--gutter)));
     max-width: none;
     margin: 0;
   }
