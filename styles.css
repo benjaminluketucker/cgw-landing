@@ -743,6 +743,12 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
 @media (min-width: 700px) {
   :root { --gutter: 56px; }
 
+  /* the design sits everything 56px in from the screen edges at every width:
+     no centred container cap, so the header, hero, blocks and footer share one edge */
+  .wrap { max-width: none; }
+  /* legal pages: the text column starts on the gutter and stops growing at 1320px */
+  .doc .wrap { max-width: 1320px; margin: 0; }
+
   .hero {
     padding: 0;
     min-height: calc(100svh - 112px);
@@ -842,8 +848,7 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    /* left edge matches .wrap (1320px centred) once the screen is wider than the container */
-    padding: 72px var(--gutter) 72px max(var(--gutter), calc((100vw - 1320px) / 2 + var(--gutter)));
+    padding: 72px var(--gutter);
     max-width: none;
     margin: 0;
   }
