@@ -415,7 +415,9 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
   max-width: 20em;
   margin: 0;
 }
-.hero-line .q { display: block; }
+/* The second half of the hero line sits a line below the first, so the two
+   read as separate thoughts rather than one run-on block. */
+.hero-line .q { display: block; margin-top: 1em; }
 
 .hero-actions { margin-top: 36px; }
 
@@ -478,6 +480,9 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
   max-width: 26em;
   margin: 12px 0 0;
 }
+
+/* A break between paragraphs, not the tighter gap used under the heading. */
+.feature p + p { margin-top: 22px; }
 
 /* square image placeholder */
 
