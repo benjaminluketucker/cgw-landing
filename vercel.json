@@ -2,16 +2,61 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/account-deletion", "destination": "/support#deleting-your-account", "permanent": true }
+    {
+      "source": "/account-deletion",
+      "destination": "/support#deleting-your-account",
+      "permanent": true
+    },
+    {
+      "source": "/assets/shop-the-feed/:path*",
+      "destination": "https://free.coolgirlwears.app/assets/shop-the-feed/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/assets/editorial/:path*",
+      "destination": "https://free.coolgirlwears.app/assets/editorial/:path*",
+      "permanent": false
+    },
+    {
+      "source": "/brand-library-dashboard",
+      "destination": "https://app.coolgirlwears.app/brand-library-dashboard",
+      "permanent": false
+    }
   ],
   "headers": [
-    { "source": "/assets/(.*)", "headers": [ { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" } ] },
-    { "source": "/(.*)", "headers": [
-      { "key": "X-Content-Type-Options", "value": "nosniff" },
-      { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-      { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" },
-      { "key": "Content-Security-Policy", "value": "default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'" }
-    ] }
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+        }
+      ]
+    }
   ]
 }
