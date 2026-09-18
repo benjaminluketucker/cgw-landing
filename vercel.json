@@ -8,16 +8,6 @@
       "permanent": true
     },
     {
-      "source": "/assets/shop-the-feed/:path*",
-      "destination": "https://free.coolgirlwears.app/assets/shop-the-feed/:path*",
-      "permanent": false
-    },
-    {
-      "source": "/assets/editorial/:path*",
-      "destination": "https://free.coolgirlwears.app/assets/editorial/:path*",
-      "permanent": false
-    },
-    {
       "source": "/brand-library-dashboard",
       "destination": "https://app.coolgirlwears.app/brand-library-dashboard",
       "permanent": false
@@ -25,7 +15,7 @@
   ],
   "headers": [
     {
-      "source": "/assets/(.*)",
+      "source": "/assets/shop-the-feed/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -57,6 +47,16 @@
           "value": "default-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; script-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/assets/shop-the-feed/:path*",
+      "destination": "https://free.coolgirlwears.app/assets/shop-the-feed/:path*"
+    },
+    {
+      "source": "/assets/editorial/:path*",
+      "destination": "https://free.coolgirlwears.app/assets/editorial/:path*"
     }
   ]
 }
