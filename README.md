@@ -23,4 +23,4 @@ Clean URLs come from `vercel.json` (`cleanUrls: true`). Deploy the repo root as 
 
 ## Assets
 
-`assets/app-store-badge.svg` is Apple's official black "Download on the App Store" badge. Photography is WebP. `assets/og-image.png` is the 1200×630 share image. Favicons at the root are cut from `assets/cgw-icon-1024.png`.
+`assets/app-store-badge.svg` is Apple's official black "Download on the App Store" badge. Photography is WebP. `assets/og-logo.png` (1024×1024, the app icon) is the share image (Ben, 9 Oct: link previews show the CGW logo); `assets/og-image.png` is the old 1200×630 wide version, kept for cached previews. Favicons at the root are cut from `assets/cgw-icon-1024.png`.
