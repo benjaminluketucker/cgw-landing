@@ -58,5 +58,7 @@
       "source": "/assets/editorial/:path*",
       "destination": "https://free.coolgirlwears.app/assets/editorial/:path*"
     }
-  ]
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
 }

@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "hero": {
+    "opening": "Welcome to your personal style app.",
+    "paragraph": "Designed to help you define your cool girl aesthetic, shop smarter and have more fun with fashion."
+  },
+  "inside": {
+    "eyebrow": "Inside the app",
+    "heading": "What you’ll",
+    "accent": "find.",
+    "intro": "Discover app-exclusive brand finds, explore outfit ideas and the latest styling tips, all together in one free app."
+  },
+  "features": [
+    {
+      "heading": "The Weekly",
+      "accent": "Edit.",
+      "first": "Introducing Cool Girl News and Brand Finds.",
+      "second": "All the latest in fashion, from new collections to the coolest collabs, as well as the brands you need on your radar from Australia and around the world. A new edition lands every week, exclusive to the app."
+    },
+    {
+      "heading": "Shop the",
+      "accent": "Feed.",
+      "first": "Shop all the latest brands and pieces we feature across our socials, from street style fit checks to style guides.",
+      "second": "Everything you’ve got your eye on, conveniently in one place, with every piece linked straight to the brand."
+    },
+    {
+      "heading": "Discover and",
+      "accent": "Saved.",
+      "first": "Make Cool Girl Wears your own.",
+      "second": "Explore any article, look or styling tip we’ve shared, then save your favourites to build a curated collection that speaks to your style, so your next outfit idea is always one tap away."
+    }
+  ],
+  "download": {
+    "heading": "Free on",
+    "accent": "iPhone."
+  },
+  "closing": {
+    "eyebrow": "Cool Girl Wears"
+  },
+  "metadata": {
+    "title": "Cool Girl Wears",
+    "description": "Welcome to your personal style app. Designed to help you define your cool girl aesthetic, shop smarter and have more fun with fashion."
+  },
+  "contact": {
+    "email": "hello@coolgirlwears.app",
+    "instagramLabel": "Instagram",
+    "instagramUrl": "https://www.instagram.com/coolgirlwears/"
+  },
+  "photos": {
+    "hero": {
+      "assetId": null,
+      "alt": "",
+      "mobile": {
+        "x": 0.5,
+        "y": 0.18
+      },
+      "desktop": {
+        "x": 0.5,
+        "y": 0.14
+      },
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "size": 1
+      }
+    },
+    "weekly": {
+      "assetId": null,
+      "alt": "The Weekly Edit",
+      "mobile": {
+        "x": 0.5,
+        "y": 0.3
+      },
+      "desktop": {
+        "x": 0.5,
+        "y": 0.3
+      },
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "size": 1
+      }
+    },
+    "feed": {
+      "assetId": null,
+      "alt": "Shop the Feed",
+      "mobile": {
+        "x": 0.5,
+        "y": 0.3
+      },
+      "desktop": {
+        "x": 0.5,
+        "y": 0.3
+      },
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "size": 1
+      }
+    },
+    "saved": {
+      "assetId": null,
+      "alt": "Discover and Saved",
+      "mobile": {
+        "x": 0.5,
+        "y": 0.3
+      },
+      "desktop": {
+        "x": 0.5,
+        "y": 0.3
+      },
+      "crop": {
+        "x": 0,
+        "y": 0,
+        "size": 1
+      }
+    }
+  }
+}

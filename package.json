@@ -1,0 +1,10 @@
+{
+  "name": "cgw-static-website",
+  "private": true,
+  "scripts": {
+    "build": "node website/remote-build.cjs"
+  },
+  "engines": {
+    "node": "22.x"
+  }
+}
