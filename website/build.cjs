@@ -6,6 +6,8 @@ async function build(packet,destination,{readAsset,sourceCommit=null}={}){
  if(!job||job.template_hash!==site.templateHash)throw Error('The website template changed. Prepare a fresh release.');
  site.validate(job.content);if(site.contentHash(job.content)!==job.content_hash)throw Error('The frozen content hash does not match.');
  fs.mkdirSync(destination,{recursive:true});fs.cpSync(site.templateRoot,destination,{recursive:true});
+ // Vercel consumes vercel.json rather than serving it. Retain a byte-exact public readback copy.
+ fs.copyFileSync(path.join(site.templateRoot,'vercel.json'),path.join(destination,'website-routing.json'));
  const mapped={};
  for(const id of Object.values(job.content.photos).map(p=>p.assetId).filter(Boolean)){
   const asset=assets[id];if(!asset||asset.id!==id||!Array.isArray(asset.outputs)||!asset.outputs.length)throw Error('Missing website photo.');
