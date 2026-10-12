@@ -7,3 +7,5 @@ The renderer must remain byte-identical to editorial-dashboard/website on codex/
 Keep the Website switch and worker OFF. Hosted staging still needs passing comparable Lighthouse mobile/desktop scores (performance >=95, no category regression, zero third-party requests), the reviewed Headless Shell executable, effective parent/child CSP and named-session/storage allow/deny checks. Verify clean routes, .html 308 controls, website-routing.json exact bytes and the custom 404 on the actual hosted artifact before activation.
 
 Full results and local evidence: ~/CLAUDE/cgw-codex-jobs/website-editor-fix/RESULTS.md.
+
+ROUND 2, 12 October: authored text now uses callback replacements, preserving literal dollar patterns on Home and the shared legal-page chrome. The matching Dashboard repair uses 055-website-editor.sql after 054-paid-ops-files.sql from Paid Ops commit 7117744bbe8dafdf1848f6c3d15f61fae72ed6d7. All legal-body bytes remain fixed; Website and worker remain OFF. Current SHAs, hashes and validation are recorded under ROUND 2 in the Results document above.
