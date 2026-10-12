@@ -9,3 +9,5 @@ Keep the Website switch and worker OFF. Hosted staging still needs passing compa
 Full results and local evidence: ~/CLAUDE/cgw-codex-jobs/website-editor-fix/RESULTS.md.
 
 ROUND 2, 12 October: authored text now uses callback replacements, preserving literal dollar patterns on Home and the shared legal-page chrome. The matching Dashboard repair uses 055-website-editor.sql after 054-paid-ops-files.sql from Paid Ops commit 7117744bbe8dafdf1848f6c3d15f61fae72ed6d7. All legal-body bytes remain fixed; Website and worker remain OFF. Current SHAs, hashes and validation are recorded under ROUND 2 in the Results document above.
+
+This review branch explicitly disables automatic Git deployment in root vercel.json for codex/cgw-website-content-r2-20261012. Fresh provider metadata readback returned 403; no provider setting was changed. Deliberate hosted staging/worker activation remains a separately reviewed action.

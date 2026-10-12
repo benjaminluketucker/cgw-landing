@@ -60,5 +60,10 @@
     }
   ],
   "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "git": {
+    "deploymentEnabled": {
+      "codex/cgw-website-content-r2-20261012": false
+    }
+  }
 }
