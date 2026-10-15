@@ -64,6 +64,29 @@
   ],
   "rewrites": [
     {
+      "source": "/content/:id",
+      "destination": "/open/article.html"
+    },
+    {
+      "source": "/article/:id",
+      "destination": "/open/article.html"
+    },
+    {
+      "source": "/section/:slug",
+      "destination": "/open/article.html"
+    },
+    {
+      "source": "/shop-the-feed",
+      "has": [
+        {
+          "type": "query",
+          "key": "post",
+          "value": ".+"
+        }
+      ],
+      "destination": "/open/article.html"
+    },
+    {
       "source": "/assets/shop-the-feed/:path*",
       "destination": "https://free.coolgirlwears.app/assets/shop-the-feed/:path*"
     },
