@@ -1,0 +1,38 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": [
+          "S5FUC45BN2.com.coolgirlwears.app"
+        ],
+        "components": [
+          {
+            "/": "/open/weekly-edit"
+          },
+          {
+            "/": "/open/shop-the-feed"
+          },
+          {
+            "/": "/open/discover"
+          },
+          {
+            "/": "/content/*"
+          },
+          {
+            "/": "/article/*"
+          },
+          {
+            "/": "/section/*"
+          },
+          {
+            "/": "/shop-the-feed",
+            "?": {
+              "post": "?*"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
