@@ -65,15 +65,15 @@
   "rewrites": [
     {
       "source": "/content/:id",
-      "destination": "/open/article.html"
+      "destination": "/open/article"
     },
     {
       "source": "/article/:id",
-      "destination": "/open/article.html"
+      "destination": "/open/article"
     },
     {
       "source": "/section/:slug",
-      "destination": "/open/article.html"
+      "destination": "/open/article"
     },
     {
       "source": "/shop-the-feed",
@@ -84,7 +84,7 @@
           "value": ".+"
         }
       ],
-      "destination": "/open/article.html"
+      "destination": "/open/article"
     },
     {
       "source": "/assets/shop-the-feed/:path*",
