@@ -11,7 +11,7 @@ test('browser refusal preserves real manual link without Store redirect',()=>{co
 test('malformed link never auto-opens a different article',()=>assert.deepEqual(browser({href:origin+'/content/%'}).calls,[]));
 test('fallback does not expose internal origin, inject markup, schedule Store timers or read account data',()=>{const js=fs.readFileSync(require.resolve('../open/article-links.js'),'utf8');assert.doesNotMatch(js,/free\.coolgirlwears|innerHTML|setTimeout|setInterval|localStorage|sessionStorage|fetch\(/);const html=fs.readFileSync(require.resolve('../open/article.html'),'utf8');assert.match(html,/Open CGW/);assert.match(html,/apps\.apple\.com\/au\/app\/cool-girl-wears\/id6812481375/);assert.doesNotMatch(html,/free\.coolgirlwears/)});
 
-test("clean URL rewrites target the clean fallback path",()=>{const c=JSON.parse(fs.readFileSync(require.resolve("../vercel.json"),"utf8"));assert.equal(c.cleanUrls,true);assert.equal(c.rewrites.filter(x=>x.destination==="/open/article").length,4);assert(!c.rewrites.some(x=>x.destination==="/open/article.html"));});
+test("clean URL rewrites target the clean fallback path",()=>{const c=JSON.parse(fs.readFileSync(require.resolve("../vercel.json"),"utf8"));assert.equal(c.cleanUrls,true);assert.equal(c.rewrites.filter(x=>x.destination==="/open/article").length,5);assert(!c.rewrites.some(x=>x.destination==="/open/article.html"));});
 
 const {safeReturn}=require('../open/article-links.js');
 for(const back of ['/saved?tab=articles&y=420','/saved?tab=posts&q=silk&y=320','/discover?source=shop_the_feed&q=resort&y=210','/week/2026-10-02','/profile','/content/'+id+'?returnTo='+encodeURIComponent('/saved?tab=articles&y=420')+'&y=321#look-2'])test('preserve safe return selection and position: '+back,()=>{

@@ -64,6 +64,10 @@
   ],
   "rewrites": [
     {
+      "source": "/week/:slug",
+      "destination": "/open/article"
+    },
+    {
       "source": "/content/:id",
       "destination": "/open/article"
     },
