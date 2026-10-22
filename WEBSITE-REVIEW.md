@@ -1,0 +1,7 @@
+# Website editor R2 source repair, 22 October 2026
+
+This source-only candidate composes the reviewed website builder branch onto current live landing source 0471deeff074f1491e66de44e89a65d34bc36cf8. Both frozen website folders now preserve every current deployed static source file, including Privacy communications disclosures, four article-opening rewrites, open fallback files and Apple association. Root buildCommand/outputDirectory stay separate from byte-exact template/vercel.json. Automatic deployment for fix/website-editor-on-1022 is disabled in source.
+
+COMPOSITION: website/ is byte-identical to the Mission Control renderer folder. Human content, assets, immutable jobs and the separate worker determine an eventual publication. Mission Control checks protected live bytes before preparation and before promotion. This candidate changes no production setting, DB or provider project. No hosted TEST or production publish/restore has been performed.
+
+The coordinator must pin both pushed SHAs in the lane RESULTS, run CI, authorize isolated TEST resources and complete the real TEST rehearsal before considering production activation. Local seed build matches all 37 deployed source file hashes; a photo-only build keeps every original file except Home identical and adds its exports. See the lane RESULTS/evidence for red controls, focused tests, builds, speed and idle limits. A local static build is not proof of authenticated hosted editor or real phone behavior.

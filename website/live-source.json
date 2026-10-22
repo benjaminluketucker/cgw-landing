@@ -1,0 +1,153 @@
+{
+  "sourceCommit": "0471deeff074f1491e66de44e89a65d34bc36cf8",
+  "files": [
+    {
+      "file": ".well-known/apple-app-site-association",
+      "sha256": "2cc9986c4984e212229f096c6117fdd7234eb6423b5ba25f761ca7f15b3a96c3"
+    },
+    {
+      "file": "404.html",
+      "sha256": "ae3fc7fbde46317f3c287456cd23020bae0abd5ffc998646b7116a0d86be2630"
+    },
+    {
+      "file": "apple-touch-icon.png",
+      "sha256": "f78556b2732f6bb5bd09d65578072fb3c49093aefcb314730dba516eda81b2f4"
+    },
+    {
+      "file": "assets/app-store-badge.svg",
+      "sha256": "a26fc5b38380272c92e9019a2eb8b45542a66814b3e2b203772db8904b9fb99f"
+    },
+    {
+      "file": "assets/cgw-icon-1024.png",
+      "sha256": "63ecaf16f7ab9090a371c77ffe4c18341c6460e46269dbdb8ed759ab4f87a518"
+    },
+    {
+      "file": "assets/f-saved-2.webp",
+      "sha256": "a2701507bea3d6ba891d9c542732b9138d1b83d50c5b4bc5294d1b81babcefdb"
+    },
+    {
+      "file": "assets/f-shop-the-feed-2.webp",
+      "sha256": "8def43a0ed7b77a69d665150fc1c7a81d2aa59c1d36f9b23130e4de96fb83683"
+    },
+    {
+      "file": "assets/f-weekly-edit-2.webp",
+      "sha256": "1df4bc7cb1a665422c3324fb0c08724087c64016b680bb19b7f30d05cd7b04ca"
+    },
+    {
+      "file": "assets/fonts/Inter-latin-ext.woff2",
+      "sha256": "a28eb6d3ccb534ae0c94ca999371df024aab60b08c3c8a5720ee9e32fa0faaa2"
+    },
+    {
+      "file": "assets/fonts/Inter-latin.woff2",
+      "sha256": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4"
+    },
+    {
+      "file": "assets/fonts/PlayfairDisplay-400-italic-latin-ext.woff2",
+      "sha256": "ac9c3bcc1848b07cf06fb1e1ff6159bb81404f9e0ed265ec0b7f1431cb3805f1"
+    },
+    {
+      "file": "assets/fonts/PlayfairDisplay-400-italic-latin.woff2",
+      "sha256": "ce3932af6f6a6c7321b6f27462213c432f0be6ef2e242d0adf7f8981562a961f"
+    },
+    {
+      "file": "assets/fonts/PlayfairDisplay-400-latin-ext.woff2",
+      "sha256": "14a61a78daa9f1468784ac5c78e39c0883fd65beb3854a77b6fc307dcb279b52"
+    },
+    {
+      "file": "assets/fonts/PlayfairDisplay-400-latin.woff2",
+      "sha256": "57edb864a5b79ea8143aa35b89212f99ef63d150052bb6dbb912827e67fa61ba"
+    },
+    {
+      "file": "assets/hero-sienna.webp",
+      "sha256": "fb83b4e49bec6ad722a97f881bf1c8ae9e648c8771930d09bda48618a84ec36b"
+    },
+    {
+      "file": "assets/og-image.png",
+      "sha256": "60157e45aee2fb7aaa5bf9b8ddd23ea146158c6c301b7444e894ffa797caf8ea"
+    },
+    {
+      "file": "assets/og-logo.png",
+      "sha256": "63ecaf16f7ab9090a371c77ffe4c18341c6460e46269dbdb8ed759ab4f87a518"
+    },
+    {
+      "file": "favicon-192.png",
+      "sha256": "66854cd6f8a83ad7c62dbea72df13533a25c0efadacf0915bc979846d2b4acd1"
+    },
+    {
+      "file": "favicon-32.png",
+      "sha256": "a0dd5fb2a9917181d9d621330913675ce330e3605667bc43398c392bc17089ee"
+    },
+    {
+      "file": "favicon.ico",
+      "sha256": "ad17ddba46c0268ebc6f3d560fcea10dea777007d1ea908ab293d5a11c52e321"
+    },
+    {
+      "file": "fonts.css",
+      "sha256": "6eff0c3af318f9bce7e2f9856d0cfca4538db7364f28e48a8dfa1cf8e7795be8"
+    },
+    {
+      "file": "index.html",
+      "sha256": "c2a106c3674a76cb2e4302b87059d6a46c9464a28e8bf41c06ee0e2506bb3071"
+    },
+    {
+      "file": "menu.js",
+      "sha256": "ecad55be0ecb77eeaabe3de786d8ee45c0897dc29a308e45464bc96b85af2a6a"
+    },
+    {
+      "file": "open/app-links.css",
+      "sha256": "c4277305bafa9e63e47a1a404cefe4286cbe2d49d76306756875520c69a8d9ca"
+    },
+    {
+      "file": "open/app-links.js",
+      "sha256": "a5d0072e852ffd526337744f8544ae64bfa437e151855acbcc63272487f547a8"
+    },
+    {
+      "file": "open/article-links.js",
+      "sha256": "ef29f2b9760064af6b814674c5b33957829414a1811d5a3a4121d69f52bb3212"
+    },
+    {
+      "file": "open/article.html",
+      "sha256": "835d675fdc0cdeb5f706805e66a3141d24651d8fc232bb77570f0c7168b4eb0e"
+    },
+    {
+      "file": "open/discover.html",
+      "sha256": "b0cf5b8553c2853fa79ac4b22201c728408e973c504ae04770bc8211fc461246"
+    },
+    {
+      "file": "open/shop-the-feed.html",
+      "sha256": "2a25017c5fa748d1f8c41e935afc9f6a71b98edf597c6b890630f1c3457bb860"
+    },
+    {
+      "file": "open/weekly-edit.html",
+      "sha256": "917232b293c5f6c4d14fe1b9c60e645089af9c3ffb7de957d1dea4ee23eef70b"
+    },
+    {
+      "file": "privacy.html",
+      "sha256": "fc727800eb5d0b02b02bf2aa4f3dc71cb6487e01adbcdf6668ef4a83df614857"
+    },
+    {
+      "file": "robots.txt",
+      "sha256": "9152a77fa4db72e8d258d0b3b2a53a295a5eb0fe749125b33c4cd1d19d6637f8"
+    },
+    {
+      "file": "sitemap.xml",
+      "sha256": "c58c90fbbdca431ae240486ca977f20e8eee439e535a13cc0cc5c47e57e4a6ed"
+    },
+    {
+      "file": "styles.css",
+      "sha256": "fad520962c17842d24fa11a53d41eee8c466791023daebbfc9fa733b1126fd71"
+    },
+    {
+      "file": "support.html",
+      "sha256": "02123a2ef067307de34cfb251c81402c9e87d74147074f69c824c531123242b2"
+    },
+    {
+      "file": "terms.html",
+      "sha256": "31e4d6b9320ed1ebe6e95e494ee302df23a7d5917bf9d2d7d8ef8339cfe34f49"
+    },
+    {
+      "file": "vercel.json",
+      "sha256": "71f8096811dfbc11956bae98ad57a73a75be7755cf7562c6e630e94a20a2eb44"
+    }
+  ]
+}
