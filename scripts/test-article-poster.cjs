@@ -55,3 +55,12 @@ test('preview path refuses traversal and cross-origin identities',()=>{
  const {previewPath}=require('../open/article-poster.js');
  for(const value of ['https://coolgirlwears.app/content/../article/'+id,'https://user@coolgirlwears.app/content/'+id,'https://evil.test/content/'+id])assert.equal(previewPath(value),undefined);
 });
+
+test('legacy Shop article slugs read all public sources, not the Weekly-only list',async()=>{
+ const r=await request({kind:'article',id:'shop-published'},async url=>{assert.equal(new URL(url).searchParams.has('source'),false);return {ok:true,status:200,json:async()=>({ok:true,items:[{...content,slug:'shop-published'}],nextCursor:null})}});assert.equal(r.status,200);assert.equal(r.body.article.title,content.title);
+});
+test('owned absolute and historical Weekly covers retain their public media route',()=>{
+ assert.equal(load().projectArticle({...content,image:{src:'https://coolgirlwears.app/assets/shop-the-feed/cover-720.webp'}}).image.src,'/assets/shop-the-feed/cover-720.webp');
+ assert.equal(load().projectArticle({...content,image:{src:'/weekly-edit/2026-08-19/cover.jpg'}}).image.src,'/article-media/weekly-edit/2026-08-19/cover.jpg');
+ for(const src of ['https://evil.test/assets/editorial/cover.webp','https://user@coolgirlwears.app/assets/editorial/cover.webp','//evil.test/cover.jpg'])assert.equal(load().projectArticle({...content,image:{src}}).image,null);
+});

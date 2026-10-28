@@ -12,8 +12,16 @@ function projectArticle(content) {
   const image = content.image;
   // Owned public media already has a same-origin, read-only rewrite. Never turn
   // a published string into an arbitrary media proxy or inject it into markup.
-  const src = typeof image?.src === 'string' && /^\/assets\/(?:editorial|shop-the-feed)\/[a-zA-Z0-9/._-]+\.(?:webp|png|jpe?g)$/.test(image.src)
-    && !image.src.split('/').includes('..') ? image.src : null;
+  let src = null;
+  if(typeof image?.src==='string') {
+    try {
+      const url=new URL(image.src,'https://coolgirlwears.app');
+      if(['https://coolgirlwears.app','https://free.coolgirlwears.app','https://app.coolgirlwears.app'].includes(url.origin)
+        && !url.username && !url.password && !url.search && !url.hash
+        && /^\/(?:assets\/(?:editorial|shop-the-feed)|weekly-edit)\/[a-zA-Z0-9/._-]+\.(?:webp|png|jpe?g)$/.test(url.pathname)
+        && !image.src.split('/').includes('..'))src=url.pathname.startsWith('/weekly-edit/')?'/article-media'+url.pathname:url.pathname;
+    }catch{ /* An unsupported image cannot change the article or its actions. */ }
+  }
   return {
     contentId:content.contentId, title:content.title.slice(0,500), summary:typeof content.summary === 'string' ? content.summary.slice(0,1000) : '',
     label:weekly ? 'The Weekly Edit' : labels[content.contentType] || '',
@@ -57,14 +65,14 @@ function createHandler({fetcher=fetch}={}) {
         content=data.content;
         if(typeof content?.contentId!=='string'||content.contentId.toLowerCase()!==q.id.toLowerCase())throw Error('wrong_article');
       } else {
-        // Same bounded public Weekly identity scan used by the app's legacy
+        // Same bounded public identity scan used by the app's legacy
         // resolver. Never choose today's article for a pinned old edition.
         let cursor;const seen=new Set();
         for(let page=0;page<8;page++) {
-          const params=new URLSearchParams({source:'weekly_edit',limit:'50',...(cursor?{cursor}: {})});
+          const params=new URLSearchParams({...(q.kind==='section'?{source:'weekly_edit'}:{}),limit:'50',...(cursor?{cursor}: {})});
           const data=await read('/api/content?'+params);
           if(!data||!Array.isArray(data.items))throw Error('invalid_public_list');
-          content=data.items.find(c=>c.contentSource==='weekly_edit'&&c.slug===q.id&&(!q.edition||c.provenance?.weekly?.editionId===q.edition));
+          content=data.items.find(c=>(q.kind!=='section'||c.contentSource==='weekly_edit')&&c.slug===q.id&&(!q.edition||c.provenance?.weekly?.editionId===q.edition));
           if(content)break;
           if(!data.nextCursor)return send(404,{ok:false,error:'missing'});
           if(typeof data.nextCursor!=='string'||seen.has(data.nextCursor))throw Error('invalid_public_cursor');

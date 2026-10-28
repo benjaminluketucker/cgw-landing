@@ -93,6 +93,10 @@
     {
       "source": "/assets/editorial/:path*",
       "destination": "https://free.coolgirlwears.app/assets/editorial/:path*"
+    },
+    {
+      "source": "/article-media/weekly-edit/:path*",
+      "destination": "https://free.coolgirlwears.app/weekly-edit/:path*"
     }
   ],
   "buildCommand": "npm run build",
