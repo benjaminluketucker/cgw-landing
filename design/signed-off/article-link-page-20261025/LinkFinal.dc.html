@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Article link page, final</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.lp *{box-sizing:border-box}
+.btn{display:flex;align-items:center;justify-content:center;height:52px;border-radius:3px;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.obtn{display:flex;align-items:center;justify-content:center;height:52px;border-radius:3px;background:transparent;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.cap{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;text-decoration:none}
+</style>
+</helmet>
+<div class="lp" style="width: {{w}}px; min-height: {{h}}px; background: {{c.bg}}; color: {{c.body}}; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased">
+
+<header style="display: flex; justify-content: space-between; align-items: center; padding: {{mastPad}}; border-bottom: 1px solid {{c.rule}}">
+<a href="https://coolgirlwears.app" style="font-family: 'Playfair Display', serif; font-size: {{wordT}}px; letter-spacing: -0.02em; color: {{c.head}}; text-decoration: none; white-space: nowrap">Cool Girl <i>Wears.</i></a>
+<span style="font-size: 10px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: {{c.label}}">{{a.section}}</span>
+</header>
+
+<main style="display: grid; grid-template-columns: {{cols}}; gap: {{colGap}}px; align-items: start; max-width: {{maxW}}px; margin: 0 auto; padding: {{mainPad}}">
+<div style="width: {{coverW}}px; height: {{coverH}}px; background: {{c.well}}; border-radius: 2px; overflow: hidden"><img src="{{a.img}}" alt="{{a.alt}}" style="display: block; width: 100%; height: 100%; object-fit: cover"></div>
+<div style="padding-top: {{textTop}}px">
+<div style="font-size: 11px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: {{c.label}}">{{a.kicker}}</div>
+<h1 style="margin: 12px 0 0; font-family: 'Playfair Display', serif; font-weight: 400; font-size: {{h1}}px; line-height: 1.06; letter-spacing: -0.025em; color: {{c.head}}">{{a.title}} <i style="color: {{c.accent}}">{{a.last}}</i></h1>
+<p style="margin: 12px 0 0; max-width: 460px; font-size: {{ledeT}}px; line-height: 1.5; color: {{c.body}}">{{a.summary}}</p>
+
+<div style="display: grid; gap: 10px; width: {{btnW}}; margin-top: 24px">
+<a class="btn" href="cgw://content" style="background: {{c.btnBg}}; color: {{c.btnInk}}; border: 1px solid {{c.btnBg}}">Open in the app</a>
+<a class="obtn" href="https://apps.apple.com/app/id6812481375" style="border: 1px solid {{c.line}}; color: {{c.head}}">Get it on the App Store ↗</a>
+</div>
+<p style="margin: 16px 0 0; font-size: 13px; line-height: 1.5; color: {{c.body}}">Free on iPhone.</p>
+
+<div style="margin-top: 40px">
+<div style="font-size: 11px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; color: {{c.label}}">{{helpLabel}}</div>
+<p style="margin: 8px 0 0; font-size: 13px; line-height: 1.5; color: {{c.body}}">{{helpLine}}</p>
+</div>
+</div>
+</main>
+
+<footer style="display: flex; flex-direction: {{footDir}}; justify-content: space-between; align-items: {{footAlign}}; gap: 16px; max-width: {{maxW}}px; margin: {{footTop}}px auto 0; padding: {{footPad}}">
+<a href="https://coolgirlwears.app" style="font-family: 'Playfair Display', serif; font-size: 20px; letter-spacing: -0.02em; color: {{c.head}}; text-decoration: none; white-space: nowrap">Cool Girl <i>Wears.</i></a>
+<nav aria-label="Help" style="display: flex; align-items: center; gap: 8px"><a class="cap" href="#" style="color: {{c.head}}">Support</a><span aria-hidden="true" style="color: {{c.label}}">·</span><a class="cap" href="#" style="color: {{c.head}}">Privacy</a></nav>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"desk":{"editor":"boolean","default":false},"cream":{"editor":"boolean","default":false},"kind":{"editor":"enum","options":["sg","iv","we"],"default":"sg"},"$preview":{"width":390,"height":1280}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const desk = !!(this.props.desk ?? false);
+    const kind = this.props.kind || 'sg';
+    const cream = !!(this.props.cream ?? false);
+    const c = cream
+      ? { bg: '#F8EBDF', body: '#5C3620', head: '#4A2915', label: '#7D5039', accent: '#A8694B', rule: 'rgba(74,41,21,.16)', well: '#F2DFCD', btnBg: '#633923', btnInk: '#F8EBDF', line: 'rgba(74,41,21,.38)' }
+      : { bg: '#633923', body: '#F2DFCD', head: '#F8EBDF', label: '#D9A98E', accent: '#D9A98E', rule: 'rgba(242,223,205,.22)', well: '#6B402A', btnBg: '#F2DFCD', btnInk: '#4A2915', line: 'rgba(248,235,223,.42)' };
+    const all = {
+      sg: { section: 'Shop the Feed', img: '/_blob/c9e4416e4aa22fb0d6eff19d245a4039', alt: 'Shell jewellery wrapped around blue jeans above white pointed shoes', kicker: 'Style Guide · 25 Oct', title: 'Jeans and a tee, but make it', last: 'cool.', summary: 'Jewellery, layering and an unexpected shoe to make your jeans and a tee feel much cooler.' },
+      iv: { section: 'Shop the Feed', img: '/_blob/f1fa5ff1a9b8e46eaa57765f1e59fa09', alt: 'The founder of BELSKI in a sheer white top and tortoiseshell sunglasses', kicker: 'Interview · 21 Oct', title: 'Romantic small Aussie label to', last: 'save.', summary: 'Why she built BELSKI around silk, and her three favourite pieces, from the polka dot Margaux to the Elsa slip dress.' },
+      we: { section: 'The Weekly Edit', img: '/_blob/a9e99c86be228d501936319b29f0b22a', alt: 'Elsa Hosk in a white lace dress by a pool', kicker: 'The Weekly Edit · 21 Oct', title: 'Elsa Hosk’s chic edit + holiday pieces under', last: 'A$200.', summary: 'This week: Witchery x Elsa Hosk, and four resort labels for beach days and holiday nights.' }
+    };
+    return {
+      desk, c, a: all[kind] || all.sg,
+      helpLabel: desk ? 'On a computer?' : 'App not opening?',
+      helpLine: desk ? 'Open this link on your iPhone to read it in the app.' : 'Tap the three dots and open this page in Safari.',
+      w: desk ? 1440 : 390,
+      h: desk ? 920 : 1280,
+      mastPad: desk ? '28px 56px' : '22px 24px',
+      wordT: desk ? 30 : 26,
+      cols: desk ? '480px minmax(0, 1fr)' : 'minmax(0, 1fr)',
+      colGap: desk ? 72 : 0,
+      maxW: desk ? 1100 : 390,
+      mainPad: desk ? '56px 0 0' : '20px 24px 0',
+      coverW: desk ? 480 : 342, coverH: desk ? 600 : 428,
+      textTop: desk ? 24 : 22,
+      h1: desk ? 56 : 34,
+      ledeT: desk ? 17 : 15,
+      btnW: desk ? '360px' : '100%',
+      footDir: desk ? 'row' : 'column',
+      footAlign: desk ? 'center' : 'flex-start',
+      footTop: desk ? 72 : 56,
+      footPad: desk ? '0 0 48px' : '0 24px 48px'
+    };
+  }
+}
+</script>
+</body>
+</html>

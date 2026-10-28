@@ -24,3 +24,5 @@ Clean URLs come from `vercel.json` (`cleanUrls: true`). Deploy the repo root as 
 ## Assets
 
 `assets/app-store-badge.svg` is Apple's official black "Download on the App Store" badge. Photography is WebP. `assets/og-logo.png` (1024×1024, the app icon) is the share image (Ben, 9 Oct: link previews show the CGW logo); `assets/og-image.png` is the old 1200×630 wide version, kept for cached previews. Favicons at the root are cut from `assets/cgw-icon-1024.png`.
+
+The signed article link poster is in `open/article.html`, `open/article-poster.css` and `open/article-poster.js`, with a public-only metadata projection in `api/article-preview.js`. Run `node --test scripts/*.cjs` with Node 24. The source artboards and canvas notes are in `design/signed-off/article-link-page-20261025/`. Release is held; see READY-TO-RELEASE.md.

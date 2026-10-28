@@ -1,0 +1,48 @@
+/* Ben's signed brown poster, 25 October 2026: LinkFinal + LinkFinalDesk. */
+*{box-sizing:border-box}
+body{margin:0;min-height:1280px;background:#633923;color:#F2DFCD;font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+[hidden]{display:none!important}
+.skip{position:absolute;left:24px;top:-100px;padding:12px;background:#F2DFCD;color:#4A2915;z-index:1}
+.skip:focus{top:4px}
+a:focus-visible{outline:2px solid #F8EBDF;outline-offset:5px}
+.poster-header{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-bottom:1px solid rgba(242,223,205,.22);gap:12px}
+.wordmark{font-family:'Playfair Display',serif;font-size:26px;letter-spacing:-.02em;color:#F8EBDF;white-space:nowrap}
+.label{font-size:11px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#D9A98E}
+.poster-header .label{font-size:10px;text-align:right}
+.poster-main{display:grid;grid-template-columns:minmax(0,1fr);gap:0;align-items:start;max-width:390px;margin:0 auto;padding:20px 24px 0}
+.poster-cover{width:100%;aspect-ratio:342/428;background:#6B402A;border-radius:2px;overflow:hidden}
+.poster-cover img{display:block;width:100%;height:100%;object-fit:cover}
+.poster-copy{padding-top:22px;min-width:0}
+h1{margin:12px 0 0;font-family:'Playfair Display',serif;font-weight:400;font-size:34px;line-height:1.06;letter-spacing:-.025em;color:#F8EBDF;overflow-wrap:break-word}
+h1 i{color:#D9A98E}
+.summary{margin:12px 0 0;max-width:460px;font-size:15px;line-height:1.5}
+.summary:empty{display:none}
+.poster-buttons{display:grid;gap:10px;width:100%;margin-top:24px}
+.button{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:3px;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;white-space:nowrap;background:#F2DFCD;color:#4A2915;border:1px solid #F2DFCD}
+.button-store{background:transparent;color:#F8EBDF;border:1px solid rgba(248,235,223,.42)}
+.free{margin:16px 0 0;font-size:13px;line-height:1.5}
+.poster-help{margin-top:40px}
+.poster-help p{margin:8px 0 0;font-size:13px;line-height:1.5}
+.help-desktop{display:none}
+.poster-footer{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;gap:16px;max-width:390px;margin:56px auto 0;padding:0 24px 48px}
+.poster-footer .wordmark{font-size:20px}
+.poster-footer nav{display:flex;align-items:center;gap:8px}
+.poster-footer nav a{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#F8EBDF}
+.poster-footer nav span{color:#D9A98E}
+@media(min-width:900px){
+body{min-height:920px}
+.poster-header{padding:28px 56px}
+.poster-header .wordmark{font-size:30px}
+.poster-main{grid-template-columns:480px minmax(0, 1fr);gap:72px;max-width:1100px;padding:56px 0 0}
+.poster-cover{width:480px;height:600px;aspect-ratio:auto}
+.poster-copy{padding-top:24px}
+h1{font-size:56px}
+.summary{font-size:17px}
+.poster-buttons{width:360px;max-width:100%}
+.help-phone{display:none}
+.help-desktop{display:block}
+.poster-footer{flex-direction:row;align-items:center;max-width:1100px;margin-top:72px;padding:0 0 48px}
+}
+@media(min-width:900px) and (max-width:1199px){.poster-main,.poster-footer{margin-left:40px;margin-right:40px}.poster-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}.poster-cover{width:100%;height:auto;aspect-ratio:4/5}}
+@media(max-width:359px){.poster-header{padding:22px 16px}.poster-header .label{font-size:8px;letter-spacing:.15em}.poster-header .wordmark{font-size:23px}.poster-main{padding-left:16px;padding-right:16px}.button{font-size:10px;letter-spacing:.18em}}
