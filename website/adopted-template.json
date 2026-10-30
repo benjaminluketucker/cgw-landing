@@ -2,11 +2,11 @@
   "version": 2,
   "previousOracleHash": "a473baca4feb4fa4641300637046263a91c207abd8189ccbae56cc6cb8973d8f",
   "newOracleHash": "e31a5875e6933b5ae516415658b4f729655e589bc5d35b06c752b374f6261874",
-  "newTemplateHash": "e43372881984f01fb54ba9ae067cddc4be2cc62a0d68aa67c62a1a6bea57ee5f",
+  "newTemplateHash": "0db2b993141d054c6860fdbc563fa53e61f1dfe4a4014f8e302a5f30fc03b70a",
   "previousTemplateHash": "f842bffc26b86c1a2530de69196209db8c47a89dc7bc3f2ac54be062ea4b1a7f",
   "routingHash": "0abce446fba4be8ed39349c732239d16c90d78fd1d9eadfbcfbc17f552a44468",
-  "reviewer": "Server overseer R3 repair direction; implementation awaiting independent review",
-  "goReference": "https://linear.app/nextchaptercreative/document/cgw-lane-article-link-adoption-1030-30-oct-2026-b2a2b1302e0f#comment-dc9aca15-9c44-48c3-8e51-0defbc3d8db9",
+  "reviewer": "Coordinator R4 live-anchor source repair; independent implementation review pending",
+  "goReference": "https://linear.app/nextchaptercreative/document/cgw-lane-article-link-adoption-1030-30-oct-2026-b2a2b1302e0f#comment-47553cdd-1d69-4a7a-bbe9-73232090ce13",
   "date": "2026-10-30",
   "previousOracle": {
     "sourceCommit": "0471deeff074f1491e66de44e89a65d34bc36cf8",
@@ -322,7 +322,7 @@
     ]
   },
   "previousSourceCommit": "0471deeff074f1491e66de44e89a65d34bc36cf8",
-  "parentAdoptionHash": "f57d6e60d77a4a3d6d51fed6cec09b81b65931334648e9728cb7ecd91a4cad20",
+  "parentAdoptionHash": "5006a92e8b831e1594e6208ebfe7dd74fe9d6914b44327ba339129a087bd7334",
   "transitionKind": "source-repair",
-  "transitionHash": "324719eb16ff609b22ac1306fe16258b4cbcbeeb4fa76897517516a88f44c781"
+  "transitionHash": "01536b954c0437e0f2e38bd1416742f271d7f988706576bbbb7c371024d3d2e9"
 }

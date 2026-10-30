@@ -2,7 +2,7 @@
 // Build-time transport only. Visitors receive static HTML and local assets.
 const {build}=require('./build.cjs');
 async function remoteBuild({env=process.env,fetcher=fetch,destination='dist'}={}){
- require('./accept-source.cjs').assertTransition(__dirname,require('./renderer.cjs').assertAdopted());
+ await require('./accept-source.cjs').assertSource(__dirname,require('./renderer.cjs').assertAdopted(),{env,fetcher});
  const origin=new URL(env.CGW_WEBSITE_BUILD_ORIGIN||'');if(origin.protocol!=='https:'||origin.pathname!=='/'||origin.search||origin.hash||origin.username||origin.password)throw Error('Use the reviewed Dashboard HTTPS origin.');
  const token=env.CGW_WEBSITE_BUILD_TOKEN;if(!token||token.length<32)throw Error('Website build read access is missing.');
  async function get(url){const response=await fetcher(url,{headers:{authorization:'Bearer '+token},redirect:'error',signal:AbortSignal.timeout(30000)});if(!response.ok)throw Error('The frozen website input is unavailable.');return response;}
