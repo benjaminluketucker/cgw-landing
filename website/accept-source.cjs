@@ -55,14 +55,28 @@ function assertTransition(root,m,anchor){
 }
 async function assertSource(root,m,{env=process.env,fetcher=fetch,dashboard=false}={}){
  // Each repository descends from its OWN production deployment, never the other line.
- const origin=new URL(dashboard?'https://dashboard.coolgirlwears.app':env.CGW_WEBSITE_PUBLIC_ORIGIN||'https://coolgirlwears.app');
- const project=dashboard?'prj_xjWCifpi74RzjSQUm1xJaYRBms3s':env.CGW_WEBSITE_VERCEL_PROJECT_ID;
+ const origin=new URL(dashboard?'https://dashboard.coolgirlwears.app':'https://coolgirlwears.app');
+ const project=dashboard?'prj_xjWCifpi74RzjSQUm1xJaYRBms3s':'prj_yoIR8n7hVye6u96Im2gsfKTPMDcd';
  const token=env.CGW_WEBSITE_VERCEL_TOKEN,team=env.CGW_WEBSITE_VERCEL_TEAM_ID;
  const fail=()=>{throw Error('The live adoption anchor could not be verified.');};
  if(origin.protocol!=='https:'||origin.pathname!=='/'||origin.search||origin.hash||origin.username||origin.password||!/^prj_[A-Za-z0-9]+$/.test(project||'')||!team||!token)fail();
  const signal=AbortSignal.timeout(20000);
  async function api(route){const u=new URL(route,'https://api.vercel.com');u.searchParams.set('teamId',team);const r=await fetcher(u,{method:'GET',headers:{authorization:'Bearer '+token},redirect:'error',cache:'no-store',signal});if(r.status!==200)fail();return r.json();}
  try{
+  // Landing selectors may repeat the reviewed binding, never choose another live anchor.
+  // Dashboard uses its own fixed binding; its Website env describes the landing it publishes.
+  if(!dashboard){
+   const selectors=map=>{if(map===undefined)return;if(!map||typeof map!=='object'||Array.isArray(map))fail();
+    if(Object.hasOwn(map,'CGW_WEBSITE_PUBLIC_ORIGIN')&&![origin.origin,origin.href].includes(map.CGW_WEBSITE_PUBLIC_ORIGIN))fail();
+    if(Object.hasOwn(map,'CGW_WEBSITE_VERCEL_PROJECT_ID')&&map.CGW_WEBSITE_VERCEL_PROJECT_ID!==project)fail();
+   };
+   selectors(env);
+   const repo=execFileSync('git',['--no-replace-objects','rev-parse','--show-toplevel'],{cwd:root,encoding:'utf8',timeout:2000,stdio:['ignore','pipe','pipe']}).trim();
+   for(let dir=path.resolve(root);;dir=path.dirname(dir)){
+    const config=path.join(dir,'vercel.json');if(fs.existsSync(config)){const value=JSON.parse(fs.readFileSync(config,'utf8'));selectors(value.env);selectors(value.build?.env);}
+    if(dir===repo)break;if(path.dirname(dir)===dir)fail();
+   }
+  }
   const route='/v4/aliases/'+encodeURIComponent(origin.hostname),before=await api(route),id=before.deploymentId||before.deployment?.id;
   if(before.projectId!==project||!/^dpl_[A-Za-z0-9]+$/.test(id||''))fail();
   const deployed=await api('/v13/deployments/'+id),anchor=deployed.meta?.githubCommitSha;
