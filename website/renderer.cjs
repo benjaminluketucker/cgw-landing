@@ -19,8 +19,48 @@ function validate(c){
  return c;
 }
 const templateRoot=path.join(__dirname,'template');
-const templateFiles=[];function walkTemplate(dir,prefix='template/'){for(const name of fs.readdirSync(dir).sort()){const file=path.join(dir,name);if(fs.statSync(file).isDirectory())walkTemplate(file,prefix+name+'/');else templateFiles.push(prefix+name);}}walkTemplate(templateRoot);
-const templateHash=sha(['renderer.cjs','build.cjs','remote-build.cjs','seed.json','live-source.json',...templateFiles].sort().map(n=>n+'\0'+fs.readFileSync(path.join(__dirname,n))).join('\0'));
+// Git adoption is the runtime oracle. live-source.json remains immutable genesis evidence.
+const adoptionFile=path.join(__dirname,'adopted-template.json');
+const json=value=>JSON.stringify(value,null,2)+'\n';
+function inventory(){
+ const rows=[];
+ function walk(dir,prefix=''){for(const name of fs.readdirSync(dir).sort()){
+  const file=path.join(dir,name),stat=fs.lstatSync(file);
+  if(stat.isSymbolicLink())throw Error('The adopted template cannot contain symbolic links.');
+  if(stat.isDirectory())walk(file,prefix+name+'/');
+  else if(stat.isFile())rows.push({file:prefix+name,sha256:sha(fs.readFileSync(file))});
+  else throw Error('Unsupported adopted template file.');
+ }}walk(templateRoot);return rows;
+}
+function sourceIdentity(){
+ const names=['renderer.cjs','build.cjs','remote-build.cjs','seed.json','live-source.json',...inventory().map(row=>'template/'+row.file)];
+ let adoption;
+ if(fs.existsSync(adoptionFile)){adoption=JSON.parse(fs.readFileSync(adoptionFile,'utf8'));names.push('adopted-template.json');}
+ // Exclude only this identity's self-field; every other adoption byte is bound.
+ return sha(names.sort().map(name=>name+'\0'+(name==='adopted-template.json'?json({...adoption,newTemplateHash:'0'.repeat(64)}):fs.readFileSync(path.join(__dirname,name)))).join('\0'));
+}
+const templateHash=sourceIdentity();
+function assertAdopted(){
+ const bytes=fs.readFileSync(adoptionFile,'utf8'),adoption=JSON.parse(bytes);
+ if(bytes!==json(adoption)||adoption.version!==1)throw Error('Use the canonical adopted template manifest.');
+ for(const field of ['reviewer','goReference'])if(typeof adoption[field]!=='string'||!adoption[field].trim())throw Error('Template adoption requires a reviewer and coordinator go reference.');
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(adoption.date||'')||!Number.isFinite(Date.parse(adoption.date)))throw Error('Template adoption requires a date.');
+ for(const oracle of [adoption.previousOracle,adoption.newOracle]){
+  if(!oracle||!Array.isArray(oracle.files)||!oracle.files.length)throw Error('Missing adopted oracle inventory.');
+  let previous='';
+  for(const row of oracle.files){
+   if(typeof row.file!=='string'||!/^[A-Za-z0-9_.\/-]+$/.test(row.file)||row.file.split('/').some(part=>!part||part==='.'||part==='..')||row.file<=previous||!/^[a-f0-9]{64}$/.test(row.sha256||''))throw Error('Invalid adopted oracle inventory.');
+   previous=row.file;
+  }
+  if(!oracle.files.some(row=>row.file==='vercel.json'))throw Error('Missing adopted routing.');
+  if(oracle.sourceCommit!==undefined&&!/^[a-f0-9]{40}$/.test(oracle.sourceCommit))throw Error('Invalid adopted static source.');
+ }
+ for(const field of ['previousTemplateHash','previousOracleHash','newOracleHash','newTemplateHash','routingHash'])if(!/^[a-f0-9]{64}$/.test(adoption[field]||''))throw Error('Invalid adopted template hash.');
+ if(sha(json(adoption.previousOracle))!==adoption.previousOracleHash||sha(json(adoption.newOracle))!==adoption.newOracleHash)throw Error('The adopted oracle hash does not match.');
+ if(adoption.routingHash!==adoption.newOracle.files.find(row=>row.file==='vercel.json').sha256)throw Error('The adopted routing hash does not match.');
+ if(JSON.stringify(inventory())!==JSON.stringify(adoption.newOracle.files)||sourceIdentity()!==adoption.newTemplateHash)throw Error('The template differs from its adoption.');
+ return adoption;
+}
 function render(c,page='index',{assets={},base='',photoCss=false}={}){
  validate(c);if(!['index','support','privacy','terms','404'].includes(page))throw Error('Unknown page.');
  let html=fs.readFileSync(path.join(templateRoot,page+'.html'),'utf8');
@@ -46,4 +86,4 @@ function render(c,page='index',{assets={},base='',photoCss=false}={}){
 }
 function photoStyles(c){validate(c);const f=(p)=>`${p.x*100}% ${p.y*100}%`;let css=`.hero-portrait{object-position:${f(c.photos.hero.desktop)}}\n`;slots.slice(1).forEach((s,i)=>{if(c.photos[s].assetId)css+=`.feature:nth-child(${i+1}) .shot{object-position:50% 50%}\n`;});return css+`@media(max-width:699px){.hero-portrait{object-position:${f(c.photos.hero.mobile)}}}\n`;}
 function contentHash(content){validate(content);const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;return sha(JSON.stringify(canonical(content)));}
-module.exports={contentHash,seed,validate,render,slots,templateHash,sha,photoStyles,templateRoot};
+module.exports={assertAdopted,contentHash,seed,validate,render,slots,templateHash,sha,photoStyles,templateRoot};

@@ -2,8 +2,9 @@
 const fs=require('node:fs'),path=require('node:path');
 const site=require('./renderer.cjs');
 async function build(packet,destination,{readAsset,sourceCommit=null}={}){
+ const adoption=site.assertAdopted();
  const {job,assets}=packet;
- if(!job||job.template_hash!==site.templateHash)throw Error('The website template changed. Prepare a fresh release.');
+ if(!job||job.template_hash!==adoption.newTemplateHash)throw Error('The website template changed. Prepare a fresh release.');
  site.validate(job.content);if(site.contentHash(job.content)!==job.content_hash)throw Error('The frozen content hash does not match.');
  fs.mkdirSync(destination,{recursive:true});fs.cpSync(site.templateRoot,destination,{recursive:true});
  // Vercel consumes vercel.json rather than serving it. Retain a byte-exact public readback copy.
@@ -19,7 +20,7 @@ async function build(packet,destination,{readAsset,sourceCommit=null}={}){
  if(changedPhotos)fs.writeFileSync(path.join(destination,'website-photos.css'),site.photoStyles(job.content));
  for(const page of ['index','support','privacy','terms','404'])fs.writeFileSync(path.join(destination,page+'.html'),site.render(job.content,page,{assets:mapped,photoCss:changedPhotos}));
  const files={};function walk(dir,prefix=''){for(const name of fs.readdirSync(dir).sort()){const relative=prefix+name,file=path.join(dir,name);if(fs.statSync(file).isDirectory())walk(file,relative+'/');else files[relative]=site.sha(fs.readFileSync(file));}}walk(destination);
- const manifest={version:1,jobId:job.id,contentHash:job.content_hash,templateHash:site.templateHash,sourceCommit,files,artifactHash:site.sha(JSON.stringify(files))};
+ const manifest={version:1,jobId:job.id,contentHash:job.content_hash,templateHash:adoption.newTemplateHash,sourceCommit,files,artifactHash:site.sha(JSON.stringify(files))};
  fs.writeFileSync(path.join(destination,'website-release.json'),JSON.stringify(manifest,null,2)+'\n');
  return manifest;
 }

@@ -105,7 +105,8 @@
     "deploymentEnabled": {
       "fix/website-editor-on-1022": false,
       "lane/article-link-page-1028": false,
-      "lane/article-link-page-1030": false
+      "lane/article-link-page-1030": false,
+      "lane/article-link-adoption-1030": false
     }
   }
 }
