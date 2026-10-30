@@ -1,3 +1,5 @@
+> 30 October R2 dry-run handoff: see [RELEASE-STEPS.md](RELEASE-STEPS.md). Matching template/local packet prepared; protected-source adoption still blocks activation. The historical identities and CI policy below are not current release authorization.
+
 # Article link poster: release handoff, 28 October 2026
 
 Prepared only. No deployment, promotion, alias, environment change, publication, account or data write is authorized by this file.
