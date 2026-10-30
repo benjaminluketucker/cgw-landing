@@ -33,18 +33,19 @@ function inventory(){
  }}walk(templateRoot);return rows;
 }
 function sourceIdentity(){
- const names=['renderer.cjs','build.cjs','remote-build.cjs','seed.json','live-source.json',...inventory().map(row=>'template/'+row.file)];
+ const names=['accept-source.cjs','renderer.cjs','build.cjs','remote-build.cjs','seed.json','live-source.json',...inventory().map(row=>'template/'+row.file)];
  let adoption;
  if(fs.existsSync(adoptionFile)){adoption=JSON.parse(fs.readFileSync(adoptionFile,'utf8'));names.push('adopted-template.json');}
  // Exclude only this identity's self-field; every other adoption byte is bound.
- return sha(names.sort().map(name=>name+'\0'+(name==='adopted-template.json'?json({...adoption,newTemplateHash:'0'.repeat(64)}):fs.readFileSync(path.join(__dirname,name)))).join('\0'));
+ return sha(Buffer.concat(names.sort().flatMap((name,i)=>[...(i?[Buffer.from('\0')]:[]),Buffer.from(name+'\0'),name==='adopted-template.json'?Buffer.from(json({...adoption,newTemplateHash:'0'.repeat(64)})):fs.readFileSync(path.join(__dirname,name))])));
 }
 const templateHash=sourceIdentity();
 function assertAdopted(){
- const bytes=fs.readFileSync(adoptionFile,'utf8'),adoption=JSON.parse(bytes);
- if(bytes!==json(adoption)||adoption.version!==1)throw Error('Use the canonical adopted template manifest.');
- for(const field of ['reviewer','goReference'])if(typeof adoption[field]!=='string'||!adoption[field].trim())throw Error('Template adoption requires a reviewer and coordinator go reference.');
- if(!/^\d{4}-\d{2}-\d{2}$/.test(adoption.date||'')||!Number.isFinite(Date.parse(adoption.date)))throw Error('Template adoption requires a date.');
+ const bytes=fs.readFileSync(adoptionFile),adoption=JSON.parse(bytes.toString('utf8'));
+ if(!bytes.equals(Buffer.from(json(adoption),'utf8'))||adoption.version!==2)throw Error('Use the canonical adopted template manifest.');
+ if(typeof adoption.reviewer!=='string'||!/[\p{L}\p{N}]/u.test(adoption.reviewer)||/[\p{Cc}\p{Cf}]/u.test(adoption.reviewer))throw Error('Template adoption requires a visible reviewer.');
+ if(!/^https:\/\/linear\.app\/nextchaptercreative\/document\/[a-z0-9-]+-[a-f0-9]{12}#comment-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/.test(adoption.goReference||''))throw Error('Template adoption requires a coordinator decision reference.');
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(adoption.date||'')||!Number.isFinite(Date.parse(adoption.date))||new Date(adoption.date).toISOString().slice(0,10)!==adoption.date)throw Error('Template adoption requires a date.');
  for(const oracle of [adoption.previousOracle,adoption.newOracle]){
   if(!oracle||!Array.isArray(oracle.files)||!oracle.files.length)throw Error('Missing adopted oracle inventory.');
   let previous='';
@@ -55,7 +56,10 @@ function assertAdopted(){
   if(!oracle.files.some(row=>row.file==='vercel.json'))throw Error('Missing adopted routing.');
   if(oracle.sourceCommit!==undefined&&!/^[a-f0-9]{40}$/.test(oracle.sourceCommit))throw Error('Invalid adopted static source.');
  }
- for(const field of ['previousTemplateHash','previousOracleHash','newOracleHash','newTemplateHash','routingHash'])if(!/^[a-f0-9]{64}$/.test(adoption[field]||''))throw Error('Invalid adopted template hash.');
+ if(!/^[a-f0-9]{40}$/.test(adoption.previousSourceCommit||''))throw Error('Missing previous adopted Git source.');
+ const genesis=require('./live-source.json');
+ if(adoption.newOracle.sourceCommit!==undefined||(adoption.previousOracle.sourceCommit!==undefined&&(json(adoption.previousOracle)!==json(genesis)||adoption.previousSourceCommit!==genesis.sourceCommit)))throw Error('Only exact genesis may attest static routing.');
+ for(const field of ['parentAdoptionHash','transitionHash','previousTemplateHash','previousOracleHash','newOracleHash','newTemplateHash','routingHash'])if(!/^[a-f0-9]{64}$/.test(adoption[field]||''))throw Error('Invalid adopted template hash.');
  if(sha(json(adoption.previousOracle))!==adoption.previousOracleHash||sha(json(adoption.newOracle))!==adoption.newOracleHash)throw Error('The adopted oracle hash does not match.');
  if(adoption.routingHash!==adoption.newOracle.files.find(row=>row.file==='vercel.json').sha256)throw Error('The adopted routing hash does not match.');
  if(JSON.stringify(inventory())!==JSON.stringify(adoption.newOracle.files)||sourceIdentity()!==adoption.newTemplateHash)throw Error('The template differs from its adoption.');
