@@ -11,6 +11,11 @@
       "source": "/brand-library-dashboard",
       "destination": "https://app.coolgirlwears.app/brand-library-dashboard",
       "permanent": false
+    },
+    {
+      "source": "/week/:id",
+      "destination": "/open/weekly-edit?edition=:id",
+      "permanent": false
     }
   ],
   "headers": [
@@ -97,7 +102,8 @@
   ],
   "git": {
     "deploymentEnabled": {
-      "lane/email-links-open-app-1111": false
+      "lane/email-links-open-app-1111": false,
+      "lane/reader-links-1111": false
     }
   }
 }
