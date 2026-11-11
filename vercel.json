@@ -69,6 +69,10 @@
   ],
   "rewrites": [
     {
+      "source": "/brand/:id",
+      "destination": "/open/article"
+    },
+    {
       "source": "/content/:id",
       "destination": "/open/article"
     },

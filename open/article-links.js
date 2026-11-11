@@ -46,9 +46,14 @@
       if (url.pathname === '/shop-the-feed') {
         const posts = url.searchParams.getAll('post');
         if (posts.length !== 1 || !uuid.test(posts[0])) return;
+        const brands = url.searchParams.getAll('brand');
+        if (brands.length) {
+          if (brands.length !== 1 || !token.test(brands[0]) || ['.', '..'].includes(brands[0])) return;
+          return 'cgw://shop-the-feed?post=' + posts[0].toLowerCase() + '&brand=' + encodeURIComponent(brands[0]);
+        }
         return 'cgw://content/' + posts[0].toLowerCase() + '?articleSource=shop_the_feed';
       }
-      const match = /^\/(content|article|section)\/([^/]+)$/.exec(url.pathname);
+      const match = /^\/(content|article|section|brand)\/([^/]+)$/.exec(url.pathname);
       if (!match || !token.test(match[2]) || match[2] === '.' || match[2] === '..') return;
       const source = url.searchParams.get('articleSource');
       if (sources.has(source)) query.set('articleSource', source);
