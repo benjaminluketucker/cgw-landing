@@ -94,5 +94,10 @@
       "source": "/assets/editorial/:path*",
       "destination": "https://free.coolgirlwears.app/assets/editorial/:path*"
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "lane/email-links-open-app-1111": false
+    }
+  }
 }

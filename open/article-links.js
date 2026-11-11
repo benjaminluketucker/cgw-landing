@@ -65,16 +65,5 @@
     } catch (_) { return; }
   }
   if (typeof module !== 'undefined' && module.exports) module.exports = { articleDestination, safeReturn };
-  if (!root.document || !root.location) return;
-  const button = root.document.getElementById('open-app');
-  const destination = articleDestination(root.location.href);
-  if (!button || !destination) return;
-  button.setAttribute('href', destination);
-  button.hidden = false;
-  const isiOS = /iPhone|iPad|iPod/.test(root.navigator.userAgent) ||
-    (root.navigator.platform === 'MacIntel' && root.navigator.maxTouchPoints > 1);
-  if (!isiOS || root.document.visibilityState !== 'visible' || root.document.prerendering) return;
-  // A blocked automatic handoff leaves the real Open CGW link available.
-  // No timer, installation guess, or automatic App Store navigation.
-  try { root.location.assign(destination); } catch (_) { /* Manual link remains. */ }
+  root.CGWArticleLinks = { articleDestination, safeReturn };
 }(typeof window === 'undefined' ? globalThis : window));
