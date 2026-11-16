@@ -317,11 +317,13 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
 
 /* ---------- hero ---------- */
 
+/* --screen-h is the screen height held still by screen-height.js, so in-app browser bars
+   hiding and showing mid-scroll never resize the hero; before the script runs it is 100svh. */
 .hero {
   background: var(--cgw-brown);
   color: var(--cgw-bg-soft);
   padding: 0 0 30px;
-  min-height: calc(100svh - 73px);
+  min-height: calc(var(--screen-h, 100svh) - 73px);
   display: flex;
   flex-direction: column;
 }
@@ -741,7 +743,7 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
 @media (max-width: 699px) {
   .hero-portrait {
     aspect-ratio: auto;
-    height: clamp(360px, calc(100svh - 330px), 125vw);
+    height: clamp(360px, calc(var(--screen-h, 100svh) - 330px), 125vw);
   }
 }
 
@@ -756,7 +758,7 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
 
   .hero {
     padding: 0;
-    min-height: calc(100svh - 112px);
+    min-height: calc(var(--screen-h, 100svh) - 112px);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -829,7 +831,7 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
     flex-direction: row-reverse;
     align-items: stretch;
     padding: 0;
-    min-height: calc(100svh - 112px);
+    min-height: calc(var(--screen-h, 100svh) - 112px);
     max-height: 900px;
   }
 
