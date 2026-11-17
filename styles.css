@@ -510,7 +510,7 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
 
 .closing {
   border-top: 1px solid var(--cgw-hair);
-  padding: 72px 0 88px;
+  padding: 26px 0 48px;
 }
 .closing h2 {
   font-size: clamp(38px, 11vw, 56px);
@@ -801,7 +801,7 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
   .feature h3 { font-size: 26px; }
   .feature p { font-size: 15px; }
 
-  .closing { padding: 96px 0 120px; }
+  .closing { padding: 32px 0 72px; }
 
   .doc { padding: 80px 0 64px; }
   .doc-body { max-width: none; }
@@ -892,4 +892,264 @@ h1 em, h2 em, h3 em { font-style: italic; color: var(--cgw-peach); }
   .notfound-title { font-size: 27px; }
   .notfound-get-line { font-size: 34px; margin-bottom: 14px; }
   .notfound-get .badge img { height: 58px; width: auto; }
+}
+
+
+/* ---------- home first screen, round 4 version 1 (signed by Ben 17 Nov 2026, CGW-2054) ----------
+   Phone (under 700px): the app's signed W5c welcome. Computer (700px and up): the clean 50/50 split.
+   The screen height is --screen-h, held still by screen-height.js (in-app browser bars never move it).
+   No motion: everything is at rest from the first frame. */
+
+.welcome-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  height: 0;
+}
+/* while the live menu is open, the wordmark and the close button stay on screen above it */
+html.menu-open .welcome-bar { position: fixed; }
+
+.welcome-mark {
+  position: absolute;
+  left: 36px;
+  top: 58px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -.03em;
+  color: #F8EBDF;
+  text-decoration: none;
+  white-space: nowrap;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, .18);
+}
+.welcome-mark em { font-style: italic; }
+.welcome-mark:hover { color: #F8EBDF; }
+
+.welcome-nav { display: none; }
+
+.welcome-menu.nav-toggle {
+  position: absolute;
+  top: 53px;
+  right: 30px;
+  border-color: rgba(248, 235, 223, .55);
+}
+.welcome-menu.nav-toggle span { background: #F8EBDF; }
+
+.welcome-bar :focus-visible,
+.welcome :focus-visible { outline-color: #F8EBDF; }
+
+.welcome {
+  --welcome-h: max(440px, var(--screen-h, 100svh));
+  position: relative;
+  height: var(--welcome-h);
+  overflow: hidden;
+  background: #633923;
+}
+
+.welcome-photo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #F2DFCD;
+  container-type: size;
+}
+/* fills by height, as W5c: 132.68% of the screen height tall, 2:3, left 54vw - 44.86vh, top -17%.
+   On a screen wider than the photo (a phone on its side) it widens to cover, never leaving a gap. */
+.welcome-photo img {
+  --photo-w: max(88.46cqh, 100cqw);
+  position: absolute;
+  display: block;
+  max-width: none;
+  width: var(--photo-w);
+  height: calc(var(--photo-w) * 1.5);
+  left: clamp(calc(100cqw - var(--photo-w)), calc(54cqw - 44.86cqh), 0px);
+  top: -17cqh;
+  background: #F2DFCD;
+}
+/* the W5c fade; its four lower stops sit 19.2px higher than the app, because the badge row (16 + 40)
+   is 19.2px taller than the app's sign-in line (16 + 20.8): the fade moves with the button */
+.welcome-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    rgba(99, 57, 35, .62) 0%,
+    rgba(99, 57, 35, .18) 13%,
+    rgba(99, 57, 35, 0) 22%,
+    rgba(99, 57, 35, 0) calc(55.6% - 19.2px),
+    rgba(99, 57, 35, .55) calc(69.6% - 19.2px),
+    rgba(99, 57, 35, .9) calc(79.6% - 19.2px),
+    #633923 calc(89.6% - 19.2px),
+    #633923 100%);
+}
+
+.welcome-copy {
+  position: absolute;
+  left: 36px;
+  right: 36px;
+  bottom: 34px;
+}
+
+.welcome-title {
+  margin: 0 0 30px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  font-size: 36px;
+  font-size: min(36px, 9.9vw); /* 36px from 364px wide; scales down only on smaller phones, so the heading never crosses the gutter */
+  line-height: 1.06;
+  letter-spacing: -.03em;
+  color: #F8EBDF;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, .18);
+}
+.welcome-title span { display: block; white-space: nowrap; }
+.welcome-title em { font-style: italic; color: #D9A98E; }
+
+/* the app's button; the brown one sits on the cream ground of the closing block */
+.get-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 54px;
+  border-radius: 3px;
+  background: #F8EBDF;
+  color: #633923;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: normal;
+  letter-spacing: 3.12px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.get-btn:hover { color: #633923; }
+.get-btn--brown,
+.get-btn--brown:hover {
+  background: #633923;
+  color: #F8EBDF;
+}
+
+/* one row under the button: Apple's badge, unmodified, 40px tall, then "Available on iPhone." */
+.get-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+.get-badge {
+  display: block;
+  flex: 0 0 auto;
+  line-height: 0;
+}
+.get-badge img {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: none;
+}
+.get-line {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #D9A98E;
+  white-space: nowrap; /* one line beside the badge, even in the narrowest brown half (700px window) */
+}
+.get-line b { font-weight: 500; color: #F8EBDF; }
+
+.closing .get { margin-top: 32px; }
+.closing .get-row { justify-content: flex-start; }
+.closing .get-line { color: #7D5039; }
+.closing .get-line b { color: #4A2915; }
+
+@media (min-width: 410px) {
+  .welcome-mark { font-size: 30px; top: 66px; }
+  .welcome-menu.nav-toggle { top: 62px; }
+  .welcome-copy { bottom: 44px; }
+  .welcome-title { font-size: 40px; }
+  .get-btn { height: 58px; }
+  .welcome-photo::after {
+    background: linear-gradient(to bottom,
+      rgba(99, 57, 35, .62) 0%,
+      rgba(99, 57, 35, .18) 13%,
+      rgba(99, 57, 35, 0) 22%,
+      rgba(99, 57, 35, 0) calc(55.3% - 19.2px),
+      rgba(99, 57, 35, .55) calc(69.3% - 19.2px),
+      rgba(99, 57, 35, .9) calc(79.3% - 19.2px),
+      #633923 calc(89.3% - 19.2px),
+      #633923 100%);
+  }
+}
+
+@media (min-width: 700px) {
+  .welcome {
+    --welcome-h: max(560px, var(--screen-h, 100svh));
+    background: linear-gradient(to bottom, #6A3F28 0%, #4D2B1B 100%);
+  }
+
+  /* the right half: the photo at 116.7% of the half's width, left -12.5% of it, top -18.9% of the height
+     (840 x 1260 at -90, -170 on 1440 x 900). On a squarer window it grows to keep the half covered; on a
+     very wide, short one it rises so her face stays in the upper third. Her head is never cropped. */
+  .welcome-photo { left: 50%; }
+  .welcome-photo img {
+    --photo-w: max(116.667cqw, 79.27cqh);
+    left: calc(45.833cqw - var(--photo-w) / 2);
+    top: min(-18.889cqh, calc(30cqh - var(--photo-w) * .435));
+  }
+  .welcome-photo::after {
+    inset: 0 0 auto 0;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(99, 57, 35, .5) 0%, rgba(99, 57, 35, 0) 100%);
+  }
+
+  .welcome-mark {
+    left: var(--gutter);
+    top: 54px;
+    font-size: 30px;
+    text-shadow: none;
+  }
+
+  .welcome-nav {
+    position: absolute;
+    right: var(--gutter);
+    top: 66px;
+    display: flex;
+    gap: 34px;
+  }
+  .welcome-nav a,
+  .welcome-nav a:hover {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: normal;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #F8EBDF;
+    text-decoration: none;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, .25);
+  }
+
+  .welcome-copy {
+    left: var(--gutter);
+    right: auto;
+    bottom: auto;
+    top: 35.3334%; /* 318 of 900, as drawn */
+    width: calc(50% - var(--gutter) - 64px);
+  }
+  .welcome-title {
+    font-size: clamp(44px, 4.45vw, 64px);
+    /* below about 920px wide the brown half is too narrow for 44px: scale down so the heading never runs onto the photo */
+    font-size: min(clamp(44px, 4.45vw, 64px), calc((50vw - var(--gutter) - 64px) / 7.8));
+    margin-bottom: 34px;
+  }
+  .welcome .get { width: min(358px, 100%); }
+  .welcome .get-row { justify-content: flex-start; }
+
+  .closing .get { width: 358px; }
 }
