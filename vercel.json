@@ -11,6 +11,11 @@
       "source": "/brand-library-dashboard",
       "destination": "https://app.coolgirlwears.app/brand-library-dashboard",
       "permanent": false
+    },
+    {
+      "source": "/week/:id",
+      "destination": "/open/weekly-edit?edition=:id",
+      "permanent": false
     }
   ],
   "headers": [
@@ -64,6 +69,10 @@
   ],
   "rewrites": [
     {
+      "source": "/brand/:id",
+      "destination": "/open/article"
+    },
+    {
       "source": "/content/:id",
       "destination": "/open/article"
     },
@@ -94,5 +103,11 @@
       "source": "/assets/editorial/:path*",
       "destination": "https://free.coolgirlwears.app/assets/editorial/:path*"
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "lane/email-links-open-app-1111": false,
+      "lane/reader-links-1111": false
+    }
+  }
 }

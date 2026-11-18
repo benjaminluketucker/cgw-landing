@@ -46,9 +46,14 @@
       if (url.pathname === '/shop-the-feed') {
         const posts = url.searchParams.getAll('post');
         if (posts.length !== 1 || !uuid.test(posts[0])) return;
+        const brands = url.searchParams.getAll('brand');
+        if (brands.length) {
+          if (brands.length !== 1 || !token.test(brands[0]) || ['.', '..'].includes(brands[0])) return;
+          return 'cgw://shop-the-feed?post=' + posts[0].toLowerCase() + '&brand=' + encodeURIComponent(brands[0]);
+        }
         return 'cgw://content/' + posts[0].toLowerCase() + '?articleSource=shop_the_feed';
       }
-      const match = /^\/(content|article|section)\/([^/]+)$/.exec(url.pathname);
+      const match = /^\/(content|article|section|brand)\/([^/]+)$/.exec(url.pathname);
       if (!match || !token.test(match[2]) || match[2] === '.' || match[2] === '..') return;
       const source = url.searchParams.get('articleSource');
       if (sources.has(source)) query.set('articleSource', source);
@@ -65,16 +70,5 @@
     } catch (_) { return; }
   }
   if (typeof module !== 'undefined' && module.exports) module.exports = { articleDestination, safeReturn };
-  if (!root.document || !root.location) return;
-  const button = root.document.getElementById('open-app');
-  const destination = articleDestination(root.location.href);
-  if (!button || !destination) return;
-  button.setAttribute('href', destination);
-  button.hidden = false;
-  const isiOS = /iPhone|iPad|iPod/.test(root.navigator.userAgent) ||
-    (root.navigator.platform === 'MacIntel' && root.navigator.maxTouchPoints > 1);
-  if (!isiOS || root.document.visibilityState !== 'visible' || root.document.prerendering) return;
-  // A blocked automatic handoff leaves the real Open CGW link available.
-  // No timer, installation guess, or automatic App Store navigation.
-  try { root.location.assign(destination); } catch (_) { /* Manual link remains. */ }
+  root.CGWArticleLinks = { articleDestination, safeReturn };
 }(typeof window === 'undefined' ? globalThis : window));
