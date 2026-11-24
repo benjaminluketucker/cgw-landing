@@ -6,7 +6,7 @@
   --cgw-text-2: #8F7464;
   --cgw-brown: #633923;
   --cgw-brown-soft: #7D5039;
-  --cgw-peach: #D9A98E;
+  --cgw-peach: #E1A786;
   --cgw-white: #FFFFFF;
 
   --cgw-hair: rgba(74, 41, 21, .2);
@@ -1006,7 +1006,7 @@ html.menu-open .welcome-bar { position: fixed; }
   text-shadow: 0 2px 10px rgba(0, 0, 0, .18);
 }
 .welcome-title span { display: block; white-space: nowrap; }
-.welcome-title em { font-style: italic; color: #D9A98E; }
+.welcome-title em { font-style: italic; color: var(--cgw-peach); }
 
 /* the app's button; the brown one sits on the cream ground of the closing block */
 .get-btn {
@@ -1058,7 +1058,7 @@ html.menu-open .welcome-bar { position: fixed; }
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
-  color: #D9A98E;
+  color: var(--cgw-peach);
   white-space: nowrap; /* one line beside the badge, even in the narrowest brown half (700px window) */
 }
 .get-line b { font-weight: 500; color: #F8EBDF; }
